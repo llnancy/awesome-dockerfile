@@ -1,4 +1,6 @@
-FROM rabbitmq:management-alpine
+# 2022-05-04 21:11:39 最新rabbitmq-delayed-message-exchange插件支持的rabbitmq server版本为3.9.x.
+# FROM rabbitmq:management-alpine
+FROM rabbitmq:3.9.16-management-alpine
 
 ARG URL=https://api.github.com/repos/rabbitmq/rabbitmq-delayed-message-exchange/releases/latest
 RUN apk add --update --no-cache curl jq wget && \
