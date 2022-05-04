@@ -1,2 +1,7 @@
 # sunchaser-dockerfiles
-个人Dockerfile仓库
+
+My Dockerfile collection
+
+## `RabbitMQ`
+
+`Docker image of RabbitMQ with management and latest version of the delayed message exchange plugin`
