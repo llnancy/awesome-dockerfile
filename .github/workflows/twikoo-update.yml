@@ -41,5 +41,5 @@ jobs:
           labels: |
             🛶 upstream
             🤖 bot
-          branch: imaegoo/twikoo-${{ steps.twikoo.outputs.release_tag }}
+          branch: sunchaser-lilu/sunchaser-dockerfiles-${{ steps.twikoo.outputs.release_tag }}
           delete-branch: true
