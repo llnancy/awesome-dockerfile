@@ -33,7 +33,7 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          committer: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          committer: GitHub <noreply@github.com>
           commit-message: Update twikoo from ${{ steps.twikoo.outputs.current_tag }} to ${{ steps.twikoo.outputs.release_tag }}
           title: Update twikoo from ${{ steps.twikoo.outputs.current_tag }} to ${{ steps.twikoo.outputs.release_tag }}
           body: |
