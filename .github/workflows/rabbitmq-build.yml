@@ -3,7 +3,7 @@ name: Build RabbitMQ
 on:
   push:
     paths:
-      - "rabbitmq/**"
+      - "rabbitmq/Dockerfile"
       - ".github/workflows/rabbitmq-build.yml"
 
 jobs:
