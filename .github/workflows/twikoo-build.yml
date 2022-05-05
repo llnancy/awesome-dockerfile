@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - "twikoo/**"
-      - ".github/workflows/twikoo-build.yml"
+      - ".github/workflows/twikoo-*.yml"
 
 jobs:
   build:
