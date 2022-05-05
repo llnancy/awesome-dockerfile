@@ -21,10 +21,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-    - name: Get twikoo version
-      id: twikoo
-      run: |
-        echo ::set-output name=version::$(< twikoo.version)
+      - name: Get twikoo version
+        id: twikoo
+        run: |
+          echo ::set-output name=version::$(< twikoo.version)
 
       - name: Set Docker image metadata
         id: docker_meta
