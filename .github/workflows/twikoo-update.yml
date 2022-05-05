@@ -1,0 +1,45 @@
+name: Update twikoo
+
+on:
+  push:
+    paths:
+      - "twikoo/**"
+      - ".github/workflows/twikoo-build.yml"
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-twikoo:
+    name: Update twikoo
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Fetch latest twikoo release
+        id: twikoo
+        run: |
+          echo ::set-output name=release_tag::$(curl -sL https://api.github.com/repos/imaegoo/twikoo/releases/latest | jq -r ".tag_name")
+          echo ::set-output name=current_tag::$(< twikoo.version)
+
+      - name: Update twikoo version
+        if: steps.twikoo.outputs.current_tag != steps.twikoo.outputs.release_tag
+        run: |
+          echo ${{ steps.twikoo.outputs.release_tag }} > twikoo.version
+
+      - name: Create pull request
+        if: steps.twikoo.outputs.current_tag != steps.twikoo.outputs.release_tag
+        uses: peter-evans/create-pull-request@v4
+        with:
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          committer: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          commit-message: Update twikoo from ${{ steps.twikoo.outputs.current_tag }} to ${{ steps.twikoo.outputs.release_tag }}
+          title: Update twikoo from ${{ steps.twikoo.outputs.current_tag }} to ${{ steps.twikoo.outputs.release_tag }}
+          body: |
+            Updates [imaegoo/twikoo](https://github.com/imaegoo/twikoo) from ${{ steps.twikoo.outputs.current_tag }} to ${{ steps.twikoo.outputs.release_tag }}
+          labels: |
+            🛶 upstream
+            🤖 bot
+          branch: imaegoo/twikoo-${{ steps.twikoo.outputs.release_tag }}
+          delete-branch: true
