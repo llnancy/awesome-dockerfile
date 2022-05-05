@@ -23,7 +23,7 @@ jobs:
 
       - name: Set Docker image metadata
         id: docker_meta
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v4
         with:
           images: sunchaserlilu/rabbitmq-management-delayed
           flavor: latest=true
