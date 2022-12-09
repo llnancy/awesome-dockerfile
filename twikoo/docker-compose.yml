@@ -1,37 +1,22 @@
 version: '3.9'
-
 services:
-  # Twikoo 主服务
-  twikoo-service:
-    image: sunchaserlilu/sunchaser-twikoo:latest
+  twikoo:
+    image: llnancy/twikoo:latest
     restart: always
     container_name: twikoo
     environment:
       TZ: Asia/Shanghai
-      MONGODB_URI: mongodb://root:B0duEDBW9yFfszd5@twikoo-mongo:27017/
+      # IP 请求限流，当同一 IP 短时间内请求次数超过阈值将对该 IP 返回错误
+      TWIKOO_THROTTLE: 251
+      # 为 true 时只监听本地请求，使得 nginx 等服务器反代之后不暴露原始端口
+      TWIKOO_LOCALHOST_ONLY: true
+      # 在一些特殊情况下使用，如使用了 CloudFlare CDN 它会将请求 IP 写到请求头的 cf-connecting-ip 字段上
+      TWIKOO_IP_HEADERS: ['headers.cf-connecting-ip']
+    volumes:
+      - /home/sunchaser/twikoo/data:/app/data
     ports:
       - 8080:8080
-  # 数据库，如使用已有数据库，请注释
-  twikoo-mongo:
-    image: mongo
-    restart: always
-    container_name: twikoo-mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: B0duEDBW9yFfszd5
-    volumes:
-      - /home/sunchaser/twikoo/data:/data/db
-  # 用于浏览器操作数据库，如需，请解除注释
-  # twikoo-mongo-express:
-  #   image: mongo-express
-  #   ports:
-  #     - 8081:8081
-  #   environment:
-  #     ME_CONFIG_MONGODB_ADMINUSERNAME: root
-  #     ME_CONFIG_MONGODB_ADMINPASSWORD: B0duEDBW9yFfszd5
-  #     ME_CONFIG_MONGODB_URL: mongodb://root:B0duEDBW9yFfszd5@twikoo-mongo:27017/
-
-# 如果没有创建过网络则注释掉下面的内容，docker会默认会创建出一个网络。
+# 如果没有创建过网络则注释掉下面的内容，docker 会默认会创建出一个网络。
 networks:
   default:
     external:
