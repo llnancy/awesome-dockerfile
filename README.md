@@ -1,6 +1,6 @@
 # awesome-dockerfile
 
-A collection of Dockerfile and docker-compose example.
+A collection of Dockerfile and docker-compose example. (Ranked in no particular order.)
 
 ## [RabbitMQ](/rabbitmq/)
 
