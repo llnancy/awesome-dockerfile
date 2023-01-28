@@ -2,11 +2,11 @@
 
 A collection of Dockerfile and docker-compose example.
 
-## [`RabbitMQ`](/rabbitmq/)
+## [RabbitMQ](/rabbitmq/)
 
 `Docker image of RabbitMQ with management and latest version of the delayed message exchange plugin`
 
-## [`Twikoo`](/twikoo/)
+## [Twikoo](/twikoo/)
 
 [https://twikoo.js.org](https://twikoo.js.org)
 
