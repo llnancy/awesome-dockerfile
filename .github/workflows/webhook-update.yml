@@ -32,6 +32,7 @@ jobs:
         if: steps.webhook.outputs.current_tag != steps.webhook.outputs.release_tag
         uses: peter-evans/create-pull-request@v4
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           commit-message: Update webhook from ${{ steps.webhook.outputs.current_tag }} to ${{ steps.webhook.outputs.release_tag }}
