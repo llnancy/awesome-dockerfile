@@ -3,7 +3,6 @@ name: Build Docker Images
 on:
   push:
     paths:
-      - "webhook/**"
       - ".github/workflows/webhook-*.yml"
   workflow_dispatch:
 
