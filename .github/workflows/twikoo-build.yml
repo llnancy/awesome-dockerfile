@@ -2,6 +2,8 @@ name: Build Twikoo
 
 on:
   push:
+    branches:
+      - "master"
     paths:
       - "twikoo/**"
       - ".github/workflows/twikoo-build.yml"
