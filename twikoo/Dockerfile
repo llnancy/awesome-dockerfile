@@ -1,4 +1,4 @@
-FROM node:lts AS build
+FROM node:lts-alpine AS build
 WORKDIR /app
 ENV NODE_ENV production
 RUN set -eux; \
