@@ -1,10 +1,10 @@
-FROM node:lts-alpine AS build
+FROM node:24.11.1-alpine AS build
 WORKDIR /app
 ENV NODE_ENV production
 RUN set -eux; \
   npm install --production tkserver@latest; \
   mkdir -p data
-FROM node:lts-alpine
+FROM node:24.11.1-alpine
 WORKDIR /app
 ENV NODE_ENV production
 COPY --from=build /app .
