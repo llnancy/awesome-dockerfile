@@ -1,11 +1,10 @@
-FROM        golang:1.19.4-alpine3.17 AS base_image
+FROM        golang:1.22.2-alpine3.19 AS base_image
 RUN         apk add --update --no-cache -t build-deps curl gcc libc-dev libgcc
 WORKDIR     /go/src/github.com/adnanh/webhook
-RUN        ls
-COPY       ./webhook/webhook.version .
+COPY        ./webhook/webhook.version .
 RUN         curl -#L -o webhook.tar.gz https://api.github.com/repos/adnanh/webhook/tarball/$(cat webhook.version) && \
-  tar -xzf webhook.tar.gz --strip 1 &&  \
-  go get -d && \
+  tar -xzf webhook.tar.gz --strip 1 && \
+  go mod download && \
   go build -ldflags="-s -w" -o /usr/local/bin/webhook
 
 FROM        alpine:3.17.0
